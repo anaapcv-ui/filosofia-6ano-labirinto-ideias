@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>O Labirinto das Ideias — Leitura Guiada | Filosofia 6º ano</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#15131f;color:#ece7f5;font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;font-size:18px;line-height:1.65}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px 90px}
+a{color:#3ddc97}
+header.top{border-bottom:2px solid #f5a623;padding:24px 0 14px;text-align:center}
+.mast{margin:0;font-size:clamp(28px,6.5vw,52px);line-height:1.05;letter-spacing:.02em;color:#f5a623;text-transform:uppercase;font-weight:800}
+.mast .sub{display:block;font-size:.30em;letter-spacing:.22em;font-weight:400;margin-top:12px;color:#a69fc0;text-transform:uppercase}
+.faixa{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;font-family:'Courier New',monospace;font-size:11.5px;letter-spacing:.12em;
+  text-transform:uppercase;border-top:1px solid #39324d;border-bottom:1px solid #39324d;margin-top:14px;padding:8px 0;color:#a69fc0}
+.selo{display:inline-block;background:#f5a623;color:#15131f;font-family:'Courier New',monospace;font-size:11.5px;letter-spacing:.14em;
+  padding:6px 13px;border-radius:3px;text-transform:uppercase;font-weight:700;margin-top:14px}
+nav.abas{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:16px 0 4px}
+nav.abas a{font-family:'Courier New',monospace;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;
+  color:#ece7f5;border:1px solid #39324d;background:#211c30;padding:9px 13px;border-radius:3px}
+nav.abas a.atual{background:#f5a623;color:#15131f;border-color:#f5a623;font-weight:700}
+nav.abas a:hover{background:#3ddc97;color:#15131f;border-color:#3ddc97}
+.painel{border:1px solid #39324d;background:#211c30;padding:12px 14px;margin:18px 0 22px;display:flex;flex-wrap:wrap;
+  gap:10px;align-items:center;justify-content:space-between;border-radius:4px}
+.painel .status{font-family:'Courier New',monospace;font-size:12.5px;color:#a69fc0}
+.painel .btns{display:flex;gap:7px;flex-wrap:wrap}
+button{font-family:'Courier New',monospace;font-size:13px;cursor:pointer;border:1px solid #39324d;background:#211c30;color:#ece7f5;
+  padding:9px 13px;border-radius:3px}
+button:hover{background:#3ddc97;color:#15131f;border-color:#3ddc97}
+button:disabled{opacity:.4;cursor:not-allowed}
+button.principal{background:#f5a623;color:#15131f;border-color:#f5a623;font-weight:700}
+input,select,textarea{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif}
+.barra{height:14px;border:1px solid #39324d;background:#211c30;border-radius:8px;overflow:hidden}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,#f5a623,#3ddc97);width:0;transition:width .4s}
+.progresso p{font-family:'Courier New',monospace;font-size:12.5px;margin:7px 0 22px;color:#a69fc0}
+.aviso-box{font-family:'Courier New',monospace;font-size:13px;background:#211c30;border:1px solid #39324d;border-left:4px solid #f5a623;
+  padding:12px 14px;border-radius:4px;line-height:1.6}
+.secao-tit{border-bottom:2px solid #f5a623;margin:34px 0 16px;padding-bottom:7px;font-size:25px;color:#f5a623}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.74);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+.overlay.on{display:flex}
+.modal{background:#211c30;border:2px solid #f5a623;max-width:440px;width:100%;padding:22px;border-radius:6px}
+.modal h3{margin:0 0 10px;font-size:21px;color:#f5a623}
+.modal p{margin:0 0 16px}
+.modal .acoes{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.rodape{border-top:2px solid #39324d;margin-top:34px;padding-top:16px;display:flex;flex-wrap:wrap;gap:12px;
+  justify-content:space-between;align-items:center;font-family:'Courier New',monospace;font-size:12.5px;color:#a69fc0}
+.rodape a{color:#ece7f5;text-decoration:none;border:1px solid #39324d;background:#211c30;padding:10px 15px;
+  border-radius:3px;text-transform:uppercase;letter-spacing:.06em}
+.rodape a:hover{background:#f5a623;color:#15131f;border-color:#f5a623}
+.tabela-wrap{overflow-x:auto}
+table.cob{width:100%;border-collapse:collapse;background:#211c30;font-size:16px}
+table.cob th,table.cob td{border:1px solid #39324d;padding:9px 11px;text-align:left}
+table.cob th{background:#2a2440;font-family:'Courier New',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#f5a623}
+@media(max-width:620px){body{font-size:17px}}
+.bloco{border:1px solid #39324d;background:#211c30;margin:0 0 22px;border-radius:5px;overflow:hidden}
+.bloco.trancado{opacity:.5}
+.bloco>.cab{display:flex;gap:12px;align-items:baseline;padding:14px 18px;border-bottom:1px solid #39324d;background:#2a2440;flex-wrap:wrap}
+.bloco .num{font-family:'Courier New',monospace;font-size:11.5px;letter-spacing:.13em;color:#15131f;background:#f5a623;padding:5px 10px;border-radius:3px;white-space:nowrap;font-weight:700}
+.bloco h2{margin:0;font-size:22px;color:#3ddc97}
+.bloco .pag{font-family:'Courier New',monospace;font-size:11.5px;color:#a69fc0;margin-left:auto;white-space:nowrap}
+.corpo{padding:18px 20px}
+.corpo p{margin:0 0 14px}
+.corpo ul{margin:0 0 14px;padding-left:22px}.corpo li{margin-bottom:7px}
+.ex{background:#2a2440;border-left:4px solid #5a8dee;padding:10px 14px;margin:0 0 14px;border-radius:0 4px 4px 0}
+.dest{background:#f5a623;color:#15131f;padding:1px 5px;border-radius:2px;font-weight:600}
+.perguntas{border-top:1px dashed #39324d;padding:16px 20px;background:#2a2440}
+.perguntas h3{font-family:'Courier New',monospace;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 12px;color:#f5a623}
+.pergunta{margin:0 0 15px}
+.pergunta label{display:block;font-weight:700;margin-bottom:6px;font-size:17px}
+textarea{width:100%;min-height:74px;font-size:16.5px;line-height:1.5;padding:10px;border:1px solid #39324d;
+  background:#15131f;color:#ece7f5;border-radius:4px;resize:vertical}
+textarea:focus{outline:2px solid #3ddc97;outline-offset:1px}
+textarea.verm{border-color:#e0563f;background:rgba(200,60,50,.12)}
+.avVerm{color:#e0563f;font-weight:bold;font-size:13.5px;margin:6px 0 0;font-family:'Courier New',monospace}
+.aviso{font-family:'Courier New',monospace;font-size:12.5px;color:#f2dda0;margin:0 0 10px;min-height:16px;line-height:1.5}
+.modelo{border-top:1px solid #39324d;padding:16px 20px;background:rgba(255,255,255,.035)}
+.modelo h4{font-family:'Courier New',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;margin:0 0 10px;color:#3ddc97}
+.mQ{border-top:1px dashed #39324d;padding-top:10px;margin-top:10px}
+.mResp{margin:0 0 8px}
+.chkbox{background:#2a2440;border:1px solid #39324d;border-radius:4px;padding:10px 12px}
+.chkTit{margin:0 0 8px;font-family:'Courier New',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#a69fc0}
+.ponto{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:5px 0;font-size:15.5px}
+.pbts{display:flex;gap:6px;flex-shrink:0}
+.btChk{border:1px solid #39324d;background:#211c30;color:#ece7f5;padding:5px 13px;border-radius:3px;cursor:pointer;font-size:13px}
+.btChk.on{background:#3ddc97;color:#15131f;border-color:#3ddc97;font-weight:700}
+.btChk.nao.on{background:#e0563f;border-color:#e0563f;color:#fff}
+.selo-ok{color:#3ddc97;font-weight:bold}
+.selo-rev{color:#e0563f;font-weight:bold}
+.auto{display:flex;gap:8px;flex-wrap:wrap;align-items:center;border-top:1px dashed #39324d;padding-top:12px;margin-top:10px}
+.cadeado{padding:16px 20px;font-family:'Courier New',monospace;font-size:13px;color:#a69fc0}
+.revisar{border:2px solid #e0563f;background:rgba(200,60,50,.10);border-radius:5px;padding:16px 20px;margin:26px 0}
+.revisar h2{margin:0 0 10px;color:#e0563f;font-size:22px}
+.revisar li{margin-bottom:6px}
+.pegadinhas{border:2px solid #5a8dee;background:rgba(90,141,238,.08);padding:18px 20px;margin:30px 0 22px;border-radius:5px}
+.pegadinhas h2{margin:0 0 12px;color:#5a8dee;font-size:23px}
+.pegadinhas ol{margin:0;padding-left:22px}.pegadinhas li{margin-bottom:10px}
+</style>
+</head><body>
+<div class="wrap">
+<header class="top">
+  <h1 class="mast">O Labirinto das Ideias<span class="sub">Kit de Estudo · Filosofia 6º ano · Avaliação 07/10</span></h1>
+  <div class="faixa"><span>6º ano · Filosofia</span><span>·</span><span>Módulos 4, 5 e 6</span><span>·</span><span>Problemas · Mudança · Questões humanas</span></div>
+  <p style="margin:0"><span class="selo">Etapa 1 — Leitura Guiada</span></p>
+</header>
+<nav class="abas"><a href="leitura-guiada.html" class="atual">📖 1. Leitura Guiada</a><a href="quiz.html">🎯 2. Quiz</a><a href="resumo.html">🗺️ 3. Resumo</a><a href="simulado.html">📝 4. Simulado</a><a href="index.html">🏠 Início</a></nav>
+
+<div class="painel">
+  <div class="status" id="status">Carregando seu progresso…</div>
+  <div class="btns">
+    <button id="btExportar">📥 Exportar</button>
+    <button id="btImportar">📤 Importar</button>
+    <button id="btZerar">🗑️ Zerar tudo</button>
+  </div>
+</div>
+<input type="file" id="arquivo" accept="application/json" style="display:none">
+
+<div class="progresso"><div class="barra"><i id="barra"></i></div>
+<p id="txtProg">Câmara 0 de 9 concluída.</p></div>
+<p class="aviso-box"><b>Como funciona:</b> leia a câmara, <b>escreva</b> as 3 respostas com suas palavras e clique em <b>Conferir</b>.
+Só depois disso aparecem a resposta modelo e o checklist. Se a resposta vier igualzinha ao texto, o material pede para reescrever
+com as suas palavras — escrever é o que faz a matéria grudar. Cada câmara do labirinto só abre depois que você confere a anterior.</p>
+<div id="blocos"></div>
+<section class="revisar" id="revisarBox" style="display:none"></section>
+<section class="pegadinhas"><h2>⚠️ As 10 pegadinhas desta prova</h2><ol><li><b>“Problema”, na filosofia, NÃO é a dificuldade do dia a dia:</b> é um problema <u>teórico</u>, uma pergunta sobre a realidade que desafia a razão.</li><li><b>Nem toda pergunta é problema filosófico.</b> Perguntar a cor favorita ou se a festa foi boa são perguntas comuns, não problemas filosóficos.</li><li><b>Dois séculos diferentes:</b> a filosofia <u>surgiu</u> no século VI a.C. (pré-socráticos); a virada para o ser humano (sofistas e Sócrates) é do século V a.C.</li><li><b>Devir × ser:</b> devir (Heráclito) = tudo muda; ser (Parmênides) = nada muda. Não troque os nomes!</li><li><b>O rio de Heráclito</b> é exemplo de <u>devir</u> (mudança), não de permanência.</li><li><b>Para Parmênides</b>, o ser é uno, eterno e imutável; as mudanças são <u>ilusões</u>. O “não ser” (o nada) NÃO existe.</li><li><b>Heráclito e Parmênides são contrários</b>, não parecidos — um diz que tudo muda, o outro diz que nada muda.</li><li><b>A virada do século V a.C.</b> foi dos problemas <u>cosmológicos</u> (natureza) para os <u>antropológicos</u> (ser humano) — não o contrário.</li><li><b>Democracia NÃO é concordar sempre:</b> é superar desacordos pelo diálogo e pelo entendimento.</li><li><b>Sofistas × Sócrates:</b> para os sofistas, os valores morais são acordos/decisões humanas (podem mudar); para Sócrates, os valores verdadeiros devem ser buscados na natureza humana, pela razão. “Conhece-te a ti mesmo” = conhecer a natureza humana, não a personalidade individual.</li></ol></section>
+<h2 class="secao-tit">🧭 Cobertura: tópico → câmara</h2>
+<div class="tabela-wrap"><table class="cob"><thead><tr><th>Tópico do escopo</th><th>Módulo</th><th>Câmara</th></tr></thead><tbody><tr><td>Problemas do dia a dia: simples e graves</td><td>Módulo 4</td><td>Câmara 1</td></tr><tr><td>Os problemas da filosofia são teóricos; nem toda pergunta é filosófica</td><td>Módulo 4</td><td>Câmara 2</td></tr><tr><td>Problema filosófico; surgimento da filosofia (séc. VI a.C.); pré-socráticos e cosmologia</td><td>Módulo 4</td><td>Câmara 3</td></tr><tr><td>Devir e ser; physis; fase pré-socrática</td><td>Módulo 5</td><td>Câmara 4</td></tr><tr><td>Heráclito e o devir (o rio)</td><td>Módulo 5</td><td>Câmara 5</td></tr><tr><td>Parmênides e o ser (uno, eterno, imutável)</td><td>Módulo 5</td><td>Câmara 6</td></tr><tr><td>Do cosmológico ao antropológico; democracia ateniense</td><td>Módulo 6</td><td>Câmara 7</td></tr><tr><td>Sofistas, oratória, paideia, valores como decisões humanas, ética</td><td>Módulo 6</td><td>Câmara 8</td></tr><tr><td>Sócrates, crítica aos sofistas, “conhece-te a ti mesmo”, natureza humana</td><td>Módulo 6</td><td>Câmara 9</td></tr></tbody></table></div>
+<div class="rodape"><span>Próximo material da sequência →</span><a href="quiz.html">🎯 Ir para o Quiz</a></div>
+
+</div>
+<div class="overlay" id="overlay"><div class="modal">
+  <h3 id="mTit">Aviso</h3><p id="mTxt"></p>
+  <div class="acoes"><button id="mNao" style="display:none">Cancelar</button>
+  <button class="principal" id="mSim">Entendi</button></div>
+</div></div>
+<script>
+function aviso(t,msg,onSim,comCancelar){
+  document.getElementById('mTit').textContent=t;
+  document.getElementById('mTxt').textContent=msg;
+  document.getElementById('mNao').style.display=comCancelar?'inline-block':'none';
+  var ov=document.getElementById('overlay'); ov.classList.add('on');
+  document.getElementById('mSim').onclick=function(){ov.classList.remove('on'); if(onSim)onSim();};
+  document.getElementById('mNao').onclick=function(){ov.classList.remove('on');};
+}
+var BLOCOS=[{"n": 1, "rot": "Câmara 1", "t": "Problemas do dia a dia", "pg": "Módulo 4", "html": "\n<p>Na vida, todo mundo enfrenta <b>problemas</b> — e na filosofia também. No dia a dia, a gente costuma dizer que alguém \"tem um problema\" quando vive uma <span class=\"dest\">situação desagradável ou difícil</span>, que provoca incômodo e, às vezes, até tristeza.</p>\n<p>Pensa em exemplos simples: uma dor de estômago, uma decepção, ficar desempregado. Em todos eles, a pessoa está diante de um problema que atrapalha sua tranquilidade e seu bem-estar, pelo menos naquele momento.</p>\n<p>Mas nem todo problema tem o mesmo tamanho. Existem <b>problemas simples</b> e <b>problemas graves</b>. Os simples quase não preocupam e se resolvem rápido — como a dor de estômago, que, se não for sinal de doença séria, passa logo com o tratamento certo.</p>\n<p>Já uma <b>frustração</b> (quando algo que planejamos dá errado) costuma exigir mais tempo e paciência. E o <b>desemprego</b> é ainda mais pesado: afeta o dinheiro da família e também as emoções, podendo gerar ansiedade, tristeza e queda na autoestima.</p>\n<div class=\"ex\"><b>Guarde isto:</b> problema, no sentido comum, é uma dificuldade da vida. Mas, como veremos, na filosofia a palavra \"problema\" significa outra coisa.</div>", "q": ["Com suas palavras, o que significa a palavra “problema” no dia a dia?", "Dê um exemplo SEU de um problema simples e um de um problema grave, e explique o que faz um ser mais pesado que o outro.", "Um colega disse: “todo problema se resolve rapidinho”. Usando o texto, mostre por que essa frase não está certa."], "a": ["É uma situação desagradável ou difícil, que provoca incômodo e às vezes tristeza, e que atrapalha a tranquilidade e o bem-estar da pessoa, pelo menos naquele momento.", "Resposta pessoal. Espera-se: um exemplo simples (resolve rápido, preocupa pouco) e um grave (exige tempo, mexe com dinheiro e/ou emoções), com a explicação da diferença.", "Resposta pessoal. Espera-se: existem problemas simples, que se resolvem rápido, mas também existem problemas graves, como o desemprego, que exigem muito tempo e esforço e afetam o dinheiro e as emoções."]}, {"n": 2, "rot": "Câmara 2", "t": "Os problemas da filosofia são teóricos", "pg": "Módulo 4", "html": "\n<p>Será que a filosofia inventa problemas só para complicar a vida das pessoas? <b>Não é isso.</b> A filosofia usa a <b>dúvida</b> e a <b>razão</b> para <span class=\"dest\">problematizar a realidade</span>, ou seja, para transformar o mundo em perguntas e buscar respostas.</p>\n<p>Na filosofia, os problemas são <b>teóricos</b>: são perguntas feitas sobre a realidade, para as quais se buscam respostas <b>desenvolvidas e demonstradas pela razão</b>. Não são as dificuldades do dia a dia, mas sim <b>questões que desafiam a inteligência humana</b> na busca pelo conhecimento.</p>\n<p>Em outras palavras, a filosofia <b>transforma a realidade em problemas</b>: ela olha para o mundo e faz perguntas profundas sobre ele.</p>\n<p>Mas atenção: <b>nem toda pergunta é um problema filosófico</b>. Perguntar se alguém quer um lanche, qual é a cor favorita de uma pessoa ou se a festa foi divertida são perguntas — só que não são problemas filosóficos.</p>\n<div class=\"ex\"><b>Problema teórico ≠ dificuldade do dia a dia.</b> O problema filosófico é uma pergunta que faz a inteligência trabalhar, e não um aperto do cotidiano.</div>", "q": ["O que quer dizer que, na filosofia, os problemas são “teóricos”?", "Escreva uma pergunta que NÃO seja um problema filosófico e explique por que ela não é.", "Um colega afirmou: “filosofia é inventar problemas para atrapalhar a vida das pessoas”. Corrija essa frase com base no texto."], "a": ["Quer dizer que são perguntas feitas sobre a realidade, para as quais se buscam respostas desenvolvidas e demonstradas pela razão; são questões que desafiam a inteligência humana, e não as dificuldades do dia a dia.", "Resposta pessoal. Espera-se uma pergunta cotidiana (como “quer um lanche?”, “qual sua cor favorita?”) com a explicação de que é só uma pergunta comum, não uma questão sobre a realidade que desafie a razão.", "Resposta pessoal. Espera-se: a filosofia não inventa problemas para atrapalhar; ela usa a dúvida e a razão para problematizar a realidade, criando perguntas teóricas que buscam conhecimento."]}, {"n": 3, "rot": "Câmara 3", "t": "O nascimento das grandes perguntas", "pg": "Módulo 4", "html": "\n<p>Um <b>problema filosófico</b> é uma <span class=\"dest\">pergunta sobre a realidade profunda das coisas, do mundo e da humanidade</span>. Ele não tem resposta imediata e fácil: exige uma pesquisa cuidadosa e racional para ser respondido.</p>\n<p>A atividade filosófica <b>surgiu na Grécia antiga</b>, por volta do <b>século VI a.C.</b>. Foi quando alguns pensadores <b>duvidaram dos relatos míticos</b> sobre a formação e os acontecimentos do mundo e começaram a fazer perguntas sobre o <b>cosmo</b> (o universo).</p>\n<p>Esses primeiros filósofos são chamados de <b>pré-socráticos</b>. Eles pesquisaram o cosmo, questionando como ele se formou, como se desenvolve e por que acontecem as transformações da natureza. Assim, <b>inauguraram a filosofia</b> como uma atividade racional comprometida com o conhecimento.</p>\n<p>Os primeiros problemas da filosofia foram sobre <b>cosmologia</b> (a origem e a ordem do universo). Por exemplo: “Como se formou o Universo?”; “O que está na origem do mundo e permanece em meio às transformações?”; “Por que os seres da natureza nascem, se desenvolvem e morrem?”.</p>\n<div class=\"ex\"><b>Marco histórico:</b> século VI a.C., na Grécia — a razão começa a substituir os mitos na explicação do mundo.</div>", "q": ["O que é um problema filosófico, segundo o texto?", "Escreva uma pergunta que um filósofo pré-socrático poderia ter feito sobre o universo e explique por que ela seria um problema filosófico.", "Explique, como se fosse para um aluno do 6º ano, o que mudou quando os primeiros filósofos deixaram de usar os mitos para explicar o mundo."], "a": ["É uma pergunta sobre a realidade profunda das coisas, do mundo e da humanidade, que não tem resposta imediata e fácil e exige uma pesquisa cuidadosa e racional.", "Resposta pessoal. Espera-se uma pergunta do tipo cosmológico (como o universo se formou, por que as coisas mudam etc.) com a explicação de que é profunda, sem resposta fácil, e exige a razão.", "Resposta pessoal. Espera-se: antes, o mundo era explicado por mitos; a partir do século VI a.C., na Grécia, os pré-socráticos passaram a explicar o mundo com perguntas e razão, inaugurando a filosofia."]}, {"n": 4, "rot": "Câmara 4", "t": "Devir e ser: duas grandes ideias", "pg": "Módulo 5", "html": "\n<p>Olha a realidade ao seu redor: na natureza, na cidade, nas pessoas e em você mesmo acontecem <b>transformações</b> o tempo todo. Daí uma pergunta bem antiga: <span class=\"dest\">tudo muda ou há coisas que permanecem sempre iguais?</span></p>\n<p>Na fase <b>pré-socrática</b>, os filósofos desenvolveram as <b>cosmologias</b>: buscavam, pela razão, os <b>princípios fundamentais</b> do mundo e estudavam a <b>physis</b> (a natureza).</p>\n<p>No meio dessas investigações, surgiram <b>duas ideias</b> que marcaram a história da filosofia: o <b>devir</b> e o <b>ser</b>.</p>\n<p>O <b>devir</b> é a ideia de <b>mudança constante</b> — a realidade estaria sempre se transformando. Já o <b>ser</b> é a ideia de <b>permanência</b> — a realidade seria sempre a mesma. Dois filósofos famosos defenderam cada um desses lados: <b>Heráclito</b> e <b>Parmênides</b>.</p>\n<div class=\"ex\"><b>Duas palavras-chave:</b> <b>devir</b> = mudar; <b>ser</b> = permanecer. Guarde bem, porque a prova adora essa diferença.</div>", "q": ["Explique a diferença entre as ideias de “devir” e de “ser”.", "Dê um exemplo do seu dia a dia que combine com a ideia de devir (mudança) e explique por quê.", "O que significa dizer que os pré-socráticos estudavam a physis? Responda com suas palavras."], "a": ["O devir é a ideia de mudança constante (a realidade estaria sempre se transformando); o ser é a ideia de permanência (a realidade seria sempre a mesma).", "Resposta pessoal. Espera-se um exemplo de algo que muda (crescer, as estações, a água correndo) com a explicação de que isso representa a mudança constante, o devir.", "Resposta pessoal. Espera-se: significa que eles estudavam a natureza, buscando pela razão os princípios fundamentais do mundo."]}, {"n": 5, "rot": "Câmara 5", "t": "Heráclito: tudo muda sem parar", "pg": "Módulo 5", "html": "\n<p>Para o filósofo <b>Heráclito de Éfeso</b> (540 a.C. – 470 a.C.), a realidade é o <b>devir</b>: a <span class=\"dest\">mudança constante de todas as coisas</span>. Nada fica parado; tudo está sempre se transformando.</p>\n<p>Heráclito deu um exemplo famoso: ninguém entra <b>duas vezes no mesmo rio</b>. Por quê? Porque, quando você entra de novo, as águas já não são as mesmas — elas correram e foram substituídas por outras. E você também já mudou um pouquinho.</p>\n<p>Ou seja, mesmo quando parece que algo continua igual (o “mesmo” rio), por dentro ele está sempre mudando. Para Heráclito, essa transformação sem fim é a própria realidade.</p>\n<div class=\"ex\"><b>Imagem para lembrar:</b> o rio de Heráclito — mesma margem, águas sempre diferentes. É o símbolo do devir.</div>", "q": ["Para Heráclito, o que é a realidade?", "Explique, com suas palavras, o exemplo do rio: por que não se entra duas vezes no mesmo rio?", "Pense numa coisa que parece “a mesma” todo dia (sua escola, sua rua) e mostre, no estilo de Heráclito, como ela na verdade está sempre mudando."], "a": ["É o devir, a mudança constante de todas as coisas: nada fica parado, tudo está sempre se transformando.", "Resposta pessoal. Espera-se: porque, quando se entra de novo, as águas já não são as mesmas (correram e foram trocadas por outras) e a própria pessoa também mudou.", "Resposta pessoal. Espera-se um exemplo do cotidiano mostrando que, apesar de parecer igual, há mudanças constantes (pessoas diferentes, detalhes mudando), ligando à ideia de devir."]}, {"n": 6, "rot": "Câmara 6", "t": "Parmênides: o ser nunca se transforma", "pg": "Módulo 5", "html": "\n<p>Se para Heráclito tudo muda, para <b>Parmênides de Eleia</b> (530 a.C. – 460 a.C.) acontece o contrário: as <b>mudanças não existem de verdade</b> — elas são apenas <span class=\"dest\">ilusões, aparências</span>.</p>\n<p>Para Parmênides, a realidade é o <b>ser</b>, e o ser <b>jamais se transforma</b>. O que existe é o ser, que é <b>uno</b> (um só), <b>eterno</b> e <b>imutável</b>. Já o <b>não ser</b> — quer dizer, o <b>nada</b> — é o que não existe.</p>\n<p>Por isso a teoria de Parmênides é <b>contrária</b> à de Heráclito: um diz que tudo muda (devir), o outro diz que nada muda de verdade (ser). Muita gente acha a ideia de Parmênides mais difícil de entender, porque ela vai contra o que os olhos parecem mostrar.</p>\n<div class=\"ex\"><b>Para não confundir:</b> Heráclito → devir (tudo muda). Parmênides → ser (nada muda; as mudanças são ilusão). O ser é uno, eterno e imutável.</div>", "q": ["Para Parmênides, como é o ser e o que acontece com as mudanças?", "Um colega escreveu: “Heráclito e Parmênides pensavam a mesma coisa sobre a realidade”. Corrija essa frase usando o texto.", "Explique para um aluno mais novo, com suas palavras, por que a ideia de Parmênides é considerada difícil de aceitar."], "a": ["O ser é uno, eterno e imutável, e jamais se transforma; as mudanças, para Parmênides, são apenas ilusões, aparências. O não ser (o nada) é o que não existe.", "Resposta pessoal. Espera-se: eles pensavam de modos contrários. Heráclito dizia que tudo muda (devir); Parmênides dizia que nada muda de verdade e que as mudanças são ilusões (ser).", "Resposta pessoal. Espera-se: porque, no dia a dia, os olhos parecem mostrar que tudo muda; dizer que as mudanças são ilusão e que o ser nunca muda vai contra o que a gente vê."]}, {"n": 7, "rot": "Câmara 7", "t": "Do cosmos para o ser humano", "pg": "Módulo 6", "html": "\n<p>No <b>século V a.C.</b>, aconteceu uma mudança importante na filosofia. Até então, os filósofos se dedicavam aos <b>problemas cosmológicos</b> (sobre a natureza e o universo). A partir daí, eles passaram a <span class=\"dest\">problematizar a humanidade</span>: começaram a investigar questões ligadas diretamente aos <b>seres humanos</b>.</p>\n<p>A preocupação da filosofia se <b>deslocou</b>: saiu das perguntas sobre a natureza e foi para os <b>problemas antropológicos</b> — isto é, sobre o ser humano e a vida em sociedade.</p>\n<p>Essa mudança aconteceu no clima cultural da <b>democracia ateniense</b> (a democracia da cidade de Atenas). A democracia <b>não significa</b> que todos sempre concordem; significa a possibilidade de as pessoas <b>superarem seus desacordos</b> por meio do <b>diálogo</b> e da <b>busca de entendimento</b>.</p>\n<div class=\"ex\"><b>Mudança de tema:</b> da natureza (cosmológico) → para o ser humano (antropológico). Cenário: a democracia de Atenas.</div>", "q": ["Que mudança de tema aconteceu na filosofia no século V a.C.?", "Com base no texto, explique com suas palavras o que é democracia — e dê um exemplo de “superar um desacordo pelo diálogo”.", "Um colega disse: “democracia é quando todo mundo concorda sempre”. Corrija essa frase usando o texto."], "a": ["A filosofia deixou de se concentrar nos problemas cosmológicos (sobre a natureza) e passou a tratar dos problemas antropológicos (sobre o ser humano e a vida em sociedade).", "Resposta pessoal. Espera-se: democracia é a possibilidade de superar desacordos pelo diálogo e pela busca de entendimento, mais um exemplo (ex.: uma turma que discute e combina uma solução conversando).", "Resposta pessoal. Espera-se: democracia não é concordar sempre; é poder superar os desacordos por meio do diálogo e do entendimento."]}, {"n": 8, "rot": "Câmara 8", "t": "Os sofistas e a arte de falar bem", "pg": "Módulo 6", "html": "\n<p>Nesse novo cenário, ganharam destaque os <b>sofistas</b>. Eles eram <b>professores de oratória</b> (a arte de falar bem em público). Em geral, eram <b>estrangeiros</b> que moravam em Atenas e <b>cobravam</b> pelos seus ensinamentos.</p>\n<p>Dois exemplos de sofistas são <b>Protágoras de Abdera</b> (490 a.C. – 415 a.C.) e <b>Górgias de Leontinos</b> (480 a.C. – 380 a.C.). Dizia-se que os sofistas eram profissionais da <b>paideia</b> da cidadania.</p>\n<p><b>Paideia</b> significa <b>educação</b> ou, num sentido mais amplo, <b>cultivo da humanidade</b>: assim como se cultiva a terra para dar bons frutos, cultiva-se o ser humano para realizar suas melhores possibilidades. Os sofistas ensinavam os cidadãos a <b>discursar</b> e a <b>criar argumentos convincentes</b> para defender suas ideias e propostas políticas nas <b>assembleias</b>. Afinal, para ser bom cidadão, era preciso saber falar bem.</p>\n<p>Os sofistas tinham uma ideia ousada: <b>recusavam</b> a visão de que os valores morais e as regras teriam origem <b>divina</b>. Para eles, o que é <span class=\"dest\">bem e mal, justo e injusto, certo e errado</span> são <b>decisões dos próprios seres humanos</b>. As leis seriam apenas acordos e costumes dos cidadãos de uma <b>pólis</b> (cidade), que poderiam ser mudados quando os cidadãos decidissem. Com isso, os sofistas ajudaram a fazer surgir a <b>ética</b> (ou <b>filosofia moral</b>).</p>\n<div class=\"ex\"><b>Ética (ou filosofia moral):</b> parte da filosofia que estuda os princípios da moral, os valores morais e como alcançar uma vida boa (virtuosa) em sociedade.</div>", "q": ["O que os sofistas ensinavam, e o que significa a palavra “paideia”?", "Explique, com suas palavras, a ideia dos sofistas de que o certo e o errado são decisões humanas (e não de origem divina).", "Dê um exemplo de situação em que “saber falar bem” ajudaria um cidadão, como os sofistas defendiam."], "a": ["Eles ensinavam oratória (a arte de falar bem) e a criar argumentos convincentes para a vida política. Paideia significa educação ou cultivo da humanidade (desenvolver as melhores possibilidades do ser humano).", "Resposta pessoal. Espera-se: para os sofistas, bem/mal, justo/injusto e certo/errado não vêm de Deus; são decisões dos seres humanos, e as leis são acordos e costumes que podem ser mudados pelos cidadãos.", "Resposta pessoal. Espera-se um exemplo de assembleia/debate (defender uma proposta, convencer a turma/os cidadãos) ligando a oratória à vida política/cidadã."]}, {"n": 9, "rot": "Câmara 9", "t": "Sócrates e o “conhece-te a ti mesmo”", "pg": "Módulo 6", "html": "\n<p>Junto com os sofistas, <b>Sócrates</b> (470 a.C. – 399 a.C.) ajudou a mudar o rumo da filosofia para os <b>problemas antropológicos</b> (sobre o ser humano). Mas havia muitas <b>discordâncias</b> entre eles.</p>\n<p>Sócrates <b>criticava os sofistas</b> por dois motivos: porque <b>cobravam</b> pelos ensinamentos e porque ele os considerava <b>adversários da filosofia</b>, já que, segundo ele, não tinham <span class=\"dest\">compromisso com a busca da verdade</span>.</p>\n<p>Diferentemente dos sofistas, Sócrates <b>não aceitava</b> que os valores morais fossem apenas acordos entre as pessoas. Para ele, era preciso <b>buscar racionalmente na natureza humana</b> os verdadeiros fundamentos dos princípios morais e da <b>vida virtuosa</b> (uma vida boa e correta).</p>\n<p>Por isso, Sócrates propôs uma tarefa famosa: <b>“conhece-te a ti mesmo”</b>. Isso <b>não</b> é cada um descobrir sua personalidade individual; é o <b>esforço racional para conhecer a natureza humana</b> — aquilo que é comum a todos os seres humanos.</p>\n<div class=\"ex\"><b>Sofistas × Sócrates:</b> para os sofistas, os valores são acordos humanos que mudam. Para Sócrates, é preciso buscar na natureza humana, com a razão, os verdadeiros valores. Mesmo assim, os dois colocaram o ser humano no centro da filosofia.</div>", "q": ["Por que Sócrates criticava os sofistas?", "Explique, com suas palavras, o que Sócrates quis dizer com “conhece-te a ti mesmo” (e o que ele NÃO quis dizer).", "Monte um quadro curto comparando sofistas e Sócrates sobre a origem dos valores morais."], "a": ["Porque eles cobravam pelos ensinamentos e porque Sócrates os considerava adversários da filosofia, alegando que não tinham compromisso com a busca da verdade.", "Resposta pessoal. Espera-se: é o esforço racional para conhecer a natureza humana (o que é comum a todos os seres humanos); não é cada pessoa descobrir só suas características individuais de personalidade.", "Resposta pessoal. Espera-se: sofistas → os valores são acordos/decisões humanas que podem mudar; Sócrates → os valores verdadeiros devem ser buscados racionalmente na natureza humana."]}];
+var PONTOS=[[["que é uma situação desagradável ou difícil", "que provoca incômodo/tristeza e atrapalha o bem-estar"], ["dei um exemplo de problema simples e um de grave", "expliquei o que torna um mais pesado que o outro"], ["que nem todo problema se resolve rápido", "que há problemas graves (ex.: desemprego) que exigem tempo e esforço"]], [["que são perguntas sobre a realidade", "que buscam respostas desenvolvidas/demonstradas pela razão", "que desafiam a inteligência humana"], ["escrevi uma pergunta do dia a dia", "expliquei por que ela não é um problema filosófico"], ["que a filosofia não inventa problemas para atrapalhar", "que ela problematiza a realidade com dúvida e razão em busca de conhecimento"]], [["que é uma pergunta sobre a realidade profunda das coisas/do mundo/da humanidade", "que não tem resposta fácil e exige pesquisa racional"], ["escrevi uma pergunta sobre o cosmo/universo", "expliquei por que ela seria um problema filosófico"], ["que antes o mundo era explicado por mitos", "que os pré-socráticos passaram a explicar com razão (séc. VI a.C., Grécia)"]], [["que o devir é mudança constante", "que o ser é permanência (a realidade sempre a mesma)"], ["dei um exemplo de algo que muda", "liguei o exemplo à ideia de devir/mudança"], ["que physis é a natureza", "que eles buscavam os princípios do mundo pela razão"]], [["que a realidade é o devir", "que é a mudança constante de todas as coisas"], ["que as águas já não são as mesmas quando se entra de novo", "que a própria pessoa também mudou"], ["escolhi algo que parece igual", "mostrei que ele está sempre mudando (estilo Heráclito/devir)"]], [["que o ser é uno, eterno e imutável / jamais se transforma", "que as mudanças são ilusões/aparências"], ["que os dois pensavam de modo contrário", "que Heráclito = devir (tudo muda) e Parmênides = ser (nada muda)"], ["que no dia a dia parece que tudo muda", "que por isso dizer que a mudança é ilusão é difícil de aceitar"]], [["que a filosofia saiu dos problemas cosmológicos (natureza)", "que passou aos problemas antropológicos (ser humano)"], ["que democracia é superar desacordos pelo diálogo/entendimento", "dei um exemplo de resolver desacordo conversando"], ["que democracia não é concordar sempre", "que é superar os desacordos pelo diálogo"]], [["que ensinavam oratória / a falar bem e argumentar", "que paideia é educação / cultivo da humanidade"], ["que para eles o certo e o errado são decisões humanas", "que as leis são acordos/costumes que podem mudar (não têm origem divina)"], ["dei um exemplo de falar bem ajudando o cidadão", "liguei à vida política / assembleia"]], [["que os sofistas cobravam pelos ensinamentos", "que Sócrates os via como adversários da filosofia, sem compromisso com a verdade"], ["que é o esforço racional para conhecer a natureza humana", "que NÃO é só conhecer a personalidade individual de cada um"], ["comparei sofistas (valores = acordos humanos)", "com Sócrates (buscar os valores na natureza humana pela razão)"]]];
+
+var KEY='filo6sj_mod456_v1_leituraguiada_v1'; var mem={};
+function ler(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return mem}}
+function gravar(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){mem=s}carimbo();}
+function carimbo(){
+  var d=new Date();
+  var f=d.toLocaleDateString('pt-BR')+' às '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  S.quando=f;
+  try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){mem=S}
+  var el=document.getElementById('status'); if(el)el.textContent='💾 Salvo automaticamente — última vez: '+f;
+}
+function ligarPainel(){
+  document.getElementById('btExportar').onclick=function(){
+    var blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+    var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='leitura-guiada-filosofia6-labirinto.json'; a.click();
+  };
+  document.getElementById('btImportar').onclick=function(){document.getElementById('arquivo').click();};
+  document.getElementById('arquivo').onchange=function(e){
+    var f=e.target.files[0]; if(!f)return; var r=new FileReader();
+    r.onload=function(){ try{ S=normaliza(JSON.parse(r.result)); gravar(S); render();
+        aviso('Pronto','Seu progresso foi importado com sucesso.');
+      }catch(err){ aviso('Ops','Não consegui ler esse arquivo. Ele precisa ser o .json exportado por este material.'); } };
+    r.readAsText(f);
+  };
+  document.getElementById('btZerar').onclick=function(){
+    aviso('Zerar tudo?','Isso apaga tudo o que foi respondido nesta página. Não dá para desfazer.',function(){
+      S=normaliza({}); gravar(S); render(); },true);
+  };
+}
+function normTxt(s){s=(s||'').toLowerCase();try{s=s.normalize('NFD').replace(/[̀-ͯ]/g,'')}catch(e){}
+  return s.replace(/[^a-z0-9\s]+/g,' ').replace(/\s+/g,' ').trim();}
+var TXTN=BLOCOS.map(function(b){var d=document.createElement('div');d.innerHTML=b.html;
+  return normTxt(d.textContent||d.innerText||'').split(' ');});
+var QTXT=BLOCOS.map(function(b){return b.q.map(function(q){return normTxt(q).split(' ');});});
+function analisaRuns(rw,bw){
+  var pos={},i2;for(i2=0;i2<bw.length;i2++){(pos[bw[i2]]=pos[bw[i2]]||[]).push(i2);}
+  var i=0,maxRun=0,cob=0,n=rw.length;
+  while(i<n){
+    var best=0,ps=pos[rw[i]]||[];
+    for(var a=0;a<ps.length;a++){var k=0;while(i+k<n&&bw[ps[a]+k]===rw[i+k])k++;if(k>best)best=k;}
+    if(best>maxRun)maxRun=best;
+    if(best>=5){cob+=best;i+=best;}else i++;
+  }
+  return {maxRun:maxRun,cob:cob,n:n};
+}
+function tiraCitacao(rw,qw){
+  var pos={},i2;for(i2=0;i2<qw.length;i2++){(pos[qw[i2]]=pos[qw[i2]]||[]).push(i2);}
+  var out=[],i=0;
+  while(i<rw.length){
+    var best=0,ps=pos[rw[i]]||[];
+    for(var a=0;a<ps.length;a++){var k=0;while(i+k<rw.length&&qw[ps[a]+k]===rw[i+k])k++;if(k>best)best=k;}
+    if(best>=4){i+=best;}else{out.push(rw[i]);i++;}
+  }
+  return out;
+}
+function ehTranscrita(txt,n,j){
+  var w=normTxt(txt).split(' ').filter(function(x){return x;});
+  if(w.length<5)return false;
+  if(j)w=tiraCitacao(w,QTXT[n-1][j-1]);
+  if(w.length<5)return false;
+  var r=analisaRuns(w,TXTN[n-1]);
+  return r.maxRun>=8||(w.length>=8&&r.cob/r.n>0.6);
+}
+function normaliza(d){d=d||{};if(!d.resp)d.resp={};if(!d.feito)d.feito={};if(!d.auto)d.auto={};
+  if(!d.chk)d.chk={};if(!d.tentou)d.tentou={};if(!d.transcrita)d.transcrita={};return d;}
+var S=normaliza(ler());
+function escapa(s){return (s||'').replace(/</g,'&lt;');}
+function statusBloco(n){
+  var rev=false,total=0,sim=0;
+  for(var j=1;j<=3;j++){
+    var k=n+'-'+j;
+    if(S.transcrita[k])rev=true;
+    var pts=PONTOS[n-1][j-1],c=S.chk[k]||[];
+    for(var p=0;p<pts.length;p++){total++;if(c[p]===0)rev=true;if(c[p]===1)sim++;}
+  }
+  if(rev)return 'rev'; if(total&&sim===total)return 'ok'; return '';
+}
+function render(){
+  var alvo=document.getElementById('blocos'); alvo.innerHTML='';
+  BLOCOS.forEach(function(b,i){
+    var liberado=(i===0)||S.feito[b.n-1];
+    var feito=!!S.feito[b.n];
+    var sec=document.createElement('section');
+    sec.className='bloco'+(liberado?'':' trancado');
+    var perg='';
+    b.q.forEach(function(qt,j){
+      var k=b.n+'-'+(j+1), v=escapa(S.resp[k]), verm=!!S.transcrita[k];
+      var ro=(feito&&!verm)?'readonly':'';
+      perg+='<div class="pergunta"><label for="t'+k+'">'+(j+1)+'. '+qt+'</label>'+
+        '<textarea id="t'+k+'" data-b="'+b.n+'" data-q="'+(j+1)+'" class="'+(verm?'verm':'')+'" '+ro+'>'+v+'</textarea>'+
+        (verm?'<p class="avVerm">🔴 Esta resposta ainda está igual ao texto do bloco — reescreva com as SUAS palavras.</p>':'')+
+        '</div>';
+    });
+    var mod='';
+    b.a.forEach(function(at,j){
+      var k=b.n+'-'+(j+1), pts=PONTOS[b.n-1][j], chk=S.chk[k]||[], linhas='';
+      pts.forEach(function(pt,pi){
+        var vv=chk[pi];
+        linhas+='<div class="ponto"><span>'+pt+'</span><span class="pbts">'+
+          '<button class="btChk '+(vv===1?'on':'')+'" data-k="'+k+'" data-p="'+pi+'" data-v="1">Sim</button>'+
+          '<button class="btChk nao '+(vv===0?'on':'')+'" data-k="'+k+'" data-p="'+pi+'" data-v="0">Não</button></span></div>';
+      });
+      mod+='<div class="mQ"><p class="mResp"><b>'+(j+1)+'.</b> '+at+'</p>'+
+           '<div class="chkbox"><p class="chkTit">✅ Minha resposta disse que…</p>'+linhas+'</div></div>';
+    });
+    var st=feito?statusBloco(b.n):'';
+    var selo=st==='ok'?'<span class="selo-ok">✅ Bloco ok</span>':st==='rev'?'<span class="selo-rev">🔁 Para revisar</span>':'';
+    sec.innerHTML='<div class="cab"><span class="num">'+b.rot+'</span><h2>'+b.t+'</h2><span class="pag">'+b.pg+'</span></div>'+
+      (liberado?
+        '<div class="corpo">'+b.html+'</div>'+
+        '<div class="perguntas"><h3>✍️ Escreva com suas palavras — 3 perguntas</h3>'+perg+
+        '<p class="aviso" id="av'+b.n+'"></p>'+
+        '<button class="principal btConferir" data-b="'+b.n+'" '+(feito?'disabled':'')+'>✔️ Conferir</button></div>'+
+        '<div class="modelo" style="display:'+(feito?'block':'none')+'" id="mod'+b.n+'">'+
+          '<h4>Resposta modelo — compare ponto a ponto</h4>'+mod+
+          '<div class="auto">'+selo+'</div></div>'
+      : '<div class="cadeado">🔒 Esta câmara abre depois que você conferir a anterior.</div>');
+    alvo.appendChild(sec);
+  });
+  ligar(); progresso(); renderRevisar();
+}
+function renderRevisar(){
+  var box=document.getElementById('revisarBox');
+  var itens=[];
+  BLOCOS.forEach(function(b){
+    if(!S.feito[b.n])return;
+    for(var j=1;j<=3;j++){
+      var k=b.n+'-'+j;
+      if(S.transcrita[k])itens.push('<b>'+b.rot+'</b>, pergunta '+j+': resposta igual ao texto — reescrever com as suas palavras.');
+      var pts=PONTOS[b.n-1][j-1],c=S.chk[k]||[];
+      for(var p=0;p<pts.length;p++){if(c[p]===0)itens.push('<b>'+b.rot+'</b>, pergunta '+j+': faltou dizer — “'+pts[p]+'”.');}
+    }
+  });
+  if(!itens.length){box.style.display='none';return;}
+  box.style.display='block';
+  var h='<h2>🔁 Para revisar antes da prova</h2><ul>';
+  itens.forEach(function(t){h+='<li>'+t+'</li>';});
+  box.innerHTML=h+'</ul>';
+}
+function ligar(){
+  document.querySelectorAll('textarea').forEach(function(t){
+    t.addEventListener('input',function(){
+      var k=t.dataset.b+'-'+t.dataset.q;
+      S.resp[k]=t.value;
+      if(S.transcrita[k]&&!ehTranscrita(t.value,parseInt(t.dataset.b,10),parseInt(t.dataset.q,10))){
+        delete S.transcrita[k]; gravar(S); render();
+        var nt=document.getElementById('t'+k);
+        if(nt){nt.focus();try{nt.selectionStart=nt.selectionEnd=nt.value.length;}catch(e){}}
+        return;
+      }
+      gravar(S);
+    });
+  });
+  document.querySelectorAll('.btConferir').forEach(function(bt){
+    bt.addEventListener('click',function(){
+      var n=parseInt(bt.dataset.b,10),vazio=false,j;
+      for(j=1;j<=3;j++){if((S.resp[n+'-'+j]||'').trim().length<3)vazio=true;}
+      var av=document.getElementById('av'+n);
+      if(vazio){av.textContent='⚠️ Responda as 3 perguntas (pelo menos 3 letras em cada) antes de conferir.';return;}
+      var primeira=[],naoMudou=[];
+      for(var j2=1;j2<=3;j2++){
+        var k=n+'-'+j2,v2=S.resp[k]||'';
+        if(ehTranscrita(v2,n,j2)){
+          if(S.tentou[k]===undefined){S.tentou[k]=v2;primeira.push(j2);}
+          else if(v2===S.tentou[k]){naoMudou.push(j2);}
+          else{S.transcrita[k]=true;}
+        }else if(S.transcrita[k]){delete S.transcrita[k];}
+      }
+      if(primeira.length||naoMudou.length){
+        gravar(S);
+        var m='🟡 ';
+        if(primeira.length)m+='Pergunta'+(primeira.length>1?'s':'')+' '+primeira.join(', ')+': boa parte da resposta está igual ao texto do bloco. Tente explicar como se fosse para um amigo, sem olhar o texto — pode ficar mais curto e simples, o que vale é ser SEU. Depois clique em Conferir de novo. ';
+        if(naoMudou.length)m+='Pergunta'+(naoMudou.length>1?'s':'')+' '+naoMudou.join(', ')+': você ainda não mudou a resposta — altere e clique em Conferir de novo.';
+        av.textContent=m; return;
+      }
+      av.textContent=''; S.feito[n]=true; gravar(S); render();
+      var el2=document.getElementById('mod'+n); if(el2)el2.scrollIntoView({behavior:'smooth',block:'center'});
+    });
+  });
+  document.querySelectorAll('.btChk').forEach(function(bt){
+    bt.addEventListener('click',function(){
+      var k=bt.dataset.k;
+      if(!S.chk[k])S.chk[k]=[];
+      S.chk[k][parseInt(bt.dataset.p,10)]=parseInt(bt.dataset.v,10);
+      var n=parseInt(k.split('-')[0],10), st=statusBloco(n); if(st)S.auto[n]=st;
+      gravar(S); render();
+    });
+  });
+}
+function progresso(){
+  var c=0; BLOCOS.forEach(function(b){if(S.feito[b.n])c++;});
+  document.getElementById('barra').style.width=(c/BLOCOS.length*100)+'%';
+  document.getElementById('txtProg').textContent='Câmara '+c+' de '+BLOCOS.length+' concluída'+(c===BLOCOS.length?' — labirinto completo! 🎉':'.');
+}
+ligarPainel(); render(); carimbo();
+</script>
+</body></html>

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>O Labirinto das Ideias — Quiz | Filosofia 6º ano</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#15131f;color:#ece7f5;font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;font-size:18px;line-height:1.65}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px 90px}
+a{color:#3ddc97}
+header.top{border-bottom:2px solid #f5a623;padding:24px 0 14px;text-align:center}
+.mast{margin:0;font-size:clamp(28px,6.5vw,52px);line-height:1.05;letter-spacing:.02em;color:#f5a623;text-transform:uppercase;font-weight:800}
+.mast .sub{display:block;font-size:.30em;letter-spacing:.22em;font-weight:400;margin-top:12px;color:#a69fc0;text-transform:uppercase}
+.faixa{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;font-family:'Courier New',monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid #39324d;border-bottom:1px solid #39324d;margin-top:14px;padding:8px 0;color:#a69fc0}
+.selo{display:inline-block;background:#f5a623;color:#15131f;font-family:'Courier New',monospace;font-size:11.5px;letter-spacing:.14em;padding:6px 13px;border-radius:3px;text-transform:uppercase;font-weight:700;margin-top:14px}
+nav.abas{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:16px 0 4px}
+nav.abas a{font-family:'Courier New',monospace;font-size:12.5px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;color:#ece7f5;border:1px solid #39324d;background:#211c30;padding:9px 13px;border-radius:3px}
+nav.abas a.atual{background:#f5a623;color:#15131f;border-color:#f5a623;font-weight:700}
+nav.abas a:hover{background:#3ddc97;color:#15131f;border-color:#3ddc97}
+.painel{border:1px solid #39324d;background:#211c30;padding:12px 14px;margin:18px 0 22px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;border-radius:4px}
+.painel .status{font-family:'Courier New',monospace;font-size:12.5px;color:#a69fc0}
+.painel .btns{display:flex;gap:7px;flex-wrap:wrap}
+button{font-family:'Courier New',monospace;font-size:13px;cursor:pointer;border:1px solid #39324d;background:#211c30;color:#ece7f5;padding:9px 13px;border-radius:3px}
+button:hover{background:#3ddc97;color:#15131f;border-color:#3ddc97}
+button:disabled{opacity:.4;cursor:not-allowed}
+button.principal{background:#f5a623;color:#15131f;border-color:#f5a623;font-weight:700}
+input,select,textarea{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif}
+.barra{height:14px;border:1px solid #39324d;background:#211c30;border-radius:8px;overflow:hidden}
+.barra i{display:block;height:100%;background:linear-gradient(90deg,#f5a623,#3ddc97);width:0;transition:width .4s}
+.progresso p{font-family:'Courier New',monospace;font-size:12.5px;margin:7px 0 22px;color:#a69fc0}
+.aviso-box{font-family:'Courier New',monospace;font-size:13px;background:#211c30;border:1px solid #39324d;border-left:4px solid #f5a623;padding:12px 14px;border-radius:4px;line-height:1.6}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.74);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}
+.overlay.on{display:flex}
+.modal{background:#211c30;border:2px solid #f5a623;max-width:440px;width:100%;padding:22px;border-radius:6px}
+.modal h3{margin:0 0 10px;font-size:21px;color:#f5a623}
+.modal p{margin:0 0 16px}
+.modal .acoes{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.rodape{border-top:2px solid #39324d;margin-top:34px;padding-top:16px;display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;font-family:'Courier New',monospace;font-size:12.5px;color:#a69fc0}
+.rodape a{color:#ece7f5;text-decoration:none;border:1px solid #39324d;background:#211c30;padding:10px 15px;border-radius:3px;text-transform:uppercase;letter-spacing:.06em}
+.rodape a:hover{background:#f5a623;color:#15131f;border-color:#f5a623}
+@media(max-width:620px){body{font-size:17px}}
+.q{border:1px solid #39324d;background:#211c30;border-radius:5px;margin:0 0 18px;overflow:hidden}
+.q .cabq{display:flex;gap:10px;align-items:center;padding:12px 16px;background:#2a2440;border-bottom:1px solid #39324d;flex-wrap:wrap}
+.q .nq{font-family:'Courier New',monospace;font-size:11.5px;letter-spacing:.12em;background:#f5a623;color:#15131f;padding:5px 10px;border-radius:3px;font-weight:700}
+.q .tag{font-family:'Courier New',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:#15131f;background:#3ddc97;padding:4px 9px;border-radius:3px}
+.q .val{margin-left:auto;font-family:'Courier New',monospace;font-size:11.5px;color:#a69fc0}
+.q .enun{padding:16px 18px 6px;font-size:17.5px}
+.alts{padding:0 18px 16px;list-style:none;margin:0}
+.alts li{margin-bottom:8px}
+.alts label{display:flex;gap:10px;align-items:flex-start;border:1px solid #39324d;background:#15131f;border-radius:4px;padding:11px 13px;cursor:pointer;font-size:16.5px}
+.alts label:hover{border-color:#3ddc97}
+.alts input{margin-top:5px;flex-shrink:0}
+.alts .letra{font-family:'Courier New',monospace;font-weight:700;color:#f5a623;flex-shrink:0}
+.alts label.certa{border-color:#3ddc97;background:rgba(61,220,151,.14)}
+.alts label.errada{border-color:#39324d;background:rgba(255,255,255,.04);opacity:.85}
+.alts label.marcada{outline:2px solid #3ddc97}
+.expl{font-size:15px;margin:6px 0 0;padding-left:26px;color:#a69fc0;line-height:1.5}
+.expl.boa{color:#3ddc97}
+.resultado{border:2px solid #f5a623;background:#211c30;border-radius:6px;padding:20px;margin:22px 0;text-align:center}
+.resultado h2{margin:0 0 8px;color:#f5a623;font-size:26px}
+.resultado .cod{font-family:'Courier New',monospace;font-size:30px;letter-spacing:.14em;background:#15131f;border:2px dashed #f5a623;display:inline-block;padding:12px 22px;border-radius:5px;margin:10px 0;color:#f5a623;font-weight:700}
+.travagab{border:1px solid #39324d;background:#211c30;border-radius:5px;padding:18px 20px;margin:20px 0}
+.travagab input{font-family:'Courier New',monospace;text-transform:uppercase;padding:9px 11px;border:1px solid #39324d;background:#15131f;color:#ece7f5;border-radius:4px;max-width:170px;font-size:16px}
+.avisoGab{color:#e0563f;font-size:14px;margin-left:8px;font-family:'Courier New',monospace}
+.modelo-disc{border:1px solid #3ddc97;background:rgba(61,220,151,.10);border-radius:5px;padding:14px 16px;margin:8px 18px 16px}
+.modelo-disc b{color:#3ddc97;display:block;margin-bottom:6px;font-family:'Courier New',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+</style>
+</head><body>
+<div class="wrap">
+<header class="top">
+  <h1 class="mast">O Labirinto das Ideias<span class="sub">Kit de Estudo · Filosofia 6º ano · Avaliação 07/10</span></h1>
+  <div class="faixa"><span>6º ano · Filosofia</span><span>·</span><span>Módulos 4, 5 e 6</span><span>·</span><span>Problemas · Mudança · Questões humanas</span></div>
+  <p style="margin:0"><span class="selo">Etapa 2 — Quiz</span></p>
+</header>
+<nav class="abas"><a href="leitura-guiada.html">📖 1. Leitura Guiada</a><a href="quiz.html" class="atual">🎯 2. Quiz</a><a href="resumo.html">🗺️ 3. Resumo</a><a href="simulado.html">📝 4. Simulado</a><a href="index.html">🏠 Início</a></nav>
+
+<div class="painel">
+  <div class="status" id="status">Carregando seu progresso…</div>
+  <div class="btns">
+    <button id="btExportar">📥 Exportar</button>
+    <button id="btImportar">📤 Importar</button>
+    <button id="btZerar">🗑️ Zerar tudo</button>
+  </div>
+</div>
+<input type="file" id="arquivo" accept="application/json" style="display:none">
+
+<div class="progresso"><div class="barra"><i id="barra"></i></div><p id="txtProg"></p></div>
+<p class="aviso-box"><b>15 questões de múltipla escolha</b> para testar o que ficou da leitura. Responda todas e clique em <b>Enviar</b>: aí aparece o código <b>MED-XX-YY</b>. O gabarito comentado só abre com esse código (ou com o código da família).</p>
+<div id="qs"></div>
+<div class="resultado" id="resultado" style="display:none"></div>
+<div style="text-align:center;margin:22px 0"><button class="principal" id="btEnviar" style="font-size:17px;padding:14px 28px">📤 Enviar respostas</button></div>
+<div class="travagab">
+  <p style="margin:0 0 10px"><b>🔒 Gabarito comentado</b> — digite o código que apareceu depois do envio (ou o código da família) para abrir.</p>
+  <input id="codGab" placeholder="MED-00-XX"><button id="btGab">Abrir gabarito</button><span class="avisoGab" id="avGab"></span>
+</div>
+<div class="rodape"><span>Próximo material →</span><a href="resumo.html">🗺️ Ir para o Resumo</a></div>
+
+</div>
+<div class="overlay" id="overlay"><div class="modal">
+  <h3 id="mTit">Aviso</h3><p id="mTxt"></p>
+  <div class="acoes"><button id="mNao" style="display:none">Cancelar</button>
+  <button class="principal" id="mSim">Entendi</button></div>
+</div></div>
+<script>function aviso(t,msg,onSim,comCancelar){
+  document.getElementById('mTit').textContent=t;
+  document.getElementById('mTxt').textContent=msg;
+  document.getElementById('mNao').style.display=comCancelar?'inline-block':'none';
+  var ov=document.getElementById('overlay'); ov.classList.add('on');
+  document.getElementById('mSim').onclick=function(){ov.classList.remove('on'); if(onSim)onSim();};
+  document.getElementById('mNao').onclick=function(){ov.classList.remove('on');};
+}</script>
+<script>var QS=[{"n": 1, "tipo": "mc", "tag": "Problema", "t": "<p>No sentido comum, do dia a dia, o que é um “problema”?</p>", "o": [{"id": "a", "txt": "Uma situação desagradável ou difícil, que provoca incômodo e atrapalha o bem-estar da pessoa.", "ex": "Correto: é o sentido comum da palavra, como uma dor de estômago, uma decepção ou o desemprego."}, {"id": "b", "txt": "Uma pergunta teórica que só os filósofos conseguem entender.", "ex": "Esse é o sentido filosófico; a pergunta é sobre o sentido comum."}, {"id": "c", "txt": "Algo que nunca tem solução.", "ex": "Existem problemas simples que se resolvem rapidamente."}, {"id": "d", "txt": "Uma regra da matemática.", "ex": "Não tem relação com o conteúdo."}], "c": "a"}, {"n": 2, "tipo": "mc", "tag": "Problema", "t": "<p>Sobre problemas simples e problemas graves, é correto dizer que:</p>", "o": [{"id": "a", "txt": "O problema simples se resolve rápido e preocupa pouco; o grave, como o desemprego, exige tempo e afeta o dinheiro e as emoções.", "ex": "Correto: o desemprego mexe com o sustento da família e pode gerar ansiedade e queda na autoestima."}, {"id": "b", "txt": "Não existe diferença entre problema simples e grave.", "ex": "O texto mostra que há desde problemas simples até graves."}, {"id": "c", "txt": "O problema grave sempre se resolve mais rápido que o simples.", "ex": "É o contrário: o grave costuma exigir mais tempo."}, {"id": "d", "txt": "Problema simples é o da escola e grave é o de casa.", "ex": "A diferença não é o lugar, e sim o peso e o tempo para resolver."}], "c": "a"}, {"n": 3, "tipo": "mc", "tag": "Filosofia", "t": "<p>Na filosofia, os problemas são:</p>", "o": [{"id": "a", "txt": "Teóricos: perguntas sobre a realidade, para as quais se buscam respostas desenvolvidas e demonstradas pela razão.", "ex": "Correto: são questões que desafiam a inteligência humana na busca pelo conhecimento."}, {"id": "b", "txt": "Sempre práticos e do dia a dia.", "ex": "Os problemas filosóficos não são as dificuldades do cotidiano."}, {"id": "c", "txt": "Sentimentos pessoais de cada um.", "ex": "Problema filosófico é uma questão da razão, não um sentimento."}, {"id": "d", "txt": "Advinhações feitas sem usar a razão.", "ex": "Ao contrário: dependem da razão e de demonstração."}], "c": "a"}, {"n": 4, "tipo": "mc", "tag": "Filosofia", "t": "<p>Qual destas perguntas NÃO é um problema filosófico?</p>", "o": [{"id": "a", "txt": "“Você quer um lanche agora?”", "ex": "Correto: é uma pergunta comum do dia a dia, não um problema filosófico."}, {"id": "b", "txt": "“O que está na origem do mundo?”", "ex": "Essa é uma pergunta filosófica sobre a realidade profunda."}, {"id": "c", "txt": "“O que é o certo e o errado?”", "ex": "Essa é uma questão filosófica (da ética)."}, {"id": "d", "txt": "“A realidade muda ou permanece?”", "ex": "Essa é uma pergunta filosófica (devir e ser)."}], "c": "a"}, {"n": 5, "tipo": "mc", "tag": "Origem", "t": "<p>A atividade filosófica surgiu:</p>", "o": [{"id": "a", "txt": "Na Grécia antiga, por volta do século VI a.C., quando pensadores duvidaram dos relatos míticos e passaram a usar a razão.", "ex": "Correto: foi quando a razão começou a substituir os mitos na explicação do mundo."}, {"id": "b", "txt": "No Egito, no século XX.", "ex": "Não corresponde ao texto."}, {"id": "c", "txt": "Em Roma, com os imperadores.", "ex": "A filosofia surgiu na Grécia, bem antes do Império Romano."}, {"id": "d", "txt": "No Brasil, no século V a.C.", "ex": "Não corresponde ao texto."}], "c": "a"}, {"n": 6, "tipo": "mc", "tag": "Pré-socráticos", "t": "<p>Os primeiros problemas da filosofia, estudados pelos pré-socráticos, eram sobre:</p>", "o": [{"id": "a", "txt": "Cosmologia: a origem, a ordem e as transformações do universo (o cosmo).", "ex": "Correto: eles perguntavam como o Universo se formou e por que as coisas mudam."}, {"id": "b", "txt": "As regras dos jogos e esportes gregos.", "ex": "Não corresponde ao texto."}, {"id": "c", "txt": "A gramática da língua grega.", "ex": "Não corresponde ao texto."}, {"id": "d", "txt": "A economia e o comércio de Atenas.", "ex": "Isso viria depois; os pré-socráticos estudavam a natureza."}], "c": "a"}, {"n": 7, "tipo": "mc", "tag": "Devir e ser", "t": "<p>As palavras “devir” e “ser” significam, respectivamente:</p>", "o": [{"id": "a", "txt": "Mudança constante e permanência.", "ex": "Correto: devir = mudar; ser = permanecer."}, {"id": "b", "txt": "Permanência e mudança.", "ex": "Está trocado: devir é mudança e ser é permanência."}, {"id": "c", "txt": "Água e fogo.", "ex": "Não corresponde ao significado dos termos."}, {"id": "d", "txt": "Verdade e mentira.", "ex": "Não corresponde ao significado dos termos."}], "c": "a"}, {"n": 8, "tipo": "mc", "tag": "Heráclito", "t": "<p>Para Heráclito de Éfeso, a realidade é:</p>", "o": [{"id": "a", "txt": "O devir: a mudança constante de todas as coisas.", "ex": "Correto: para ele, nada fica parado, tudo se transforma."}, {"id": "b", "txt": "O ser, que jamais se transforma.", "ex": "Essa é a ideia de Parmênides, não de Heráclito."}, {"id": "c", "txt": "O nada.", "ex": "Não corresponde ao pensamento de Heráclito."}, {"id": "d", "txt": "Um mito dos deuses.", "ex": "Os filósofos justamente se afastaram dos mitos."}], "c": "a"}, {"n": 9, "tipo": "mc", "tag": "Heráclito", "t": "<p>O famoso exemplo do rio, de Heráclito, mostra que:</p>", "o": [{"id": "a", "txt": "Ninguém entra duas vezes no mesmo rio, porque as águas (e a própria pessoa) estão sempre mudando.", "ex": "Correto: é a imagem do devir, a mudança constante."}, {"id": "b", "txt": "O rio nunca muda, sempre é o mesmo.", "ex": "É o contrário do que Heráclito quis dizer."}, {"id": "c", "txt": "A água do rio é sempre a mesma água.", "ex": "As águas correm e são substituídas por outras."}, {"id": "d", "txt": "É impossível nadar em rios.", "ex": "Não é esse o sentido do exemplo."}], "c": "a"}, {"n": 10, "tipo": "mc", "tag": "Parmênides", "t": "<p>Para Parmênides de Eleia, o ser é:</p>", "o": [{"id": "a", "txt": "Uno, eterno e imutável; as mudanças são apenas ilusões.", "ex": "Correto: o “não ser” (o nada) é o que não existe."}, {"id": "b", "txt": "Mutável e passageiro.", "ex": "Isso contraria a ideia de Parmênides."}, {"id": "c", "txt": "A mesma coisa que o nada.", "ex": "Para Parmênides, o não ser (nada) é o que não existe."}, {"id": "d", "txt": "Formado por muitos seres que mudam o tempo todo.", "ex": "Para ele, o ser é uno e não muda."}], "c": "a"}, {"n": 11, "tipo": "mc", "tag": "Heráclito × Parmênides", "t": "<p>A relação entre as ideias de Heráclito e de Parmênides é de:</p>", "o": [{"id": "a", "txt": "Oposição: um diz que tudo muda (devir), o outro diz que nada muda de verdade (ser).", "ex": "Correto: as teorias são contrárias."}, {"id": "b", "txt": "Concordância total entre os dois.", "ex": "As teorias são contrárias, não iguais."}, {"id": "c", "txt": "Nenhuma relação entre elas.", "ex": "Elas tratam do mesmo tema (mudança x permanência), de modos opostos."}, {"id": "d", "txt": "Cópia: Parmênides apenas repetiu Heráclito.", "ex": "Pelo contrário, ele defendeu o oposto."}], "c": "a"}, {"n": 12, "tipo": "mc", "tag": "Virada", "t": "<p>No século V a.C., a filosofia deslocou seu tema principal:</p>", "o": [{"id": "a", "txt": "Dos problemas cosmológicos (a natureza) para os problemas antropológicos (o ser humano).", "ex": "Correto: os filósofos passaram a problematizar a humanidade."}, {"id": "b", "txt": "Dos problemas humanos para os da natureza.", "ex": "Está invertido: a mudança foi da natureza para o ser humano."}, {"id": "c", "txt": "Da matemática para a física.", "ex": "Não corresponde ao texto."}, {"id": "d", "txt": "Da Grécia para Roma.", "ex": "A mudança foi de tema, não de lugar."}], "c": "a"}, {"n": 13, "tipo": "mc", "tag": "Democracia", "t": "<p>Segundo o texto, a democracia significa:</p>", "o": [{"id": "a", "txt": "A possibilidade de as pessoas superarem seus desacordos por meio do diálogo e da busca de entendimento.", "ex": "Correto: democracia não é concordar sempre."}, {"id": "b", "txt": "Que todos sempre concordam uns com os outros.", "ex": "A democracia não pressupõe concordância permanente."}, {"id": "c", "txt": "Um governo que funciona sem nenhuma lei.", "ex": "Não corresponde ao texto."}, {"id": "d", "txt": "O governo de uma só pessoa.", "ex": "Isso seria o contrário da democracia."}], "c": "a"}, {"n": 14, "tipo": "mc", "tag": "Sofistas", "t": "<p>Os sofistas, como Protágoras e Górgias, eram:</p>", "o": [{"id": "a", "txt": "Professores de oratória (a arte de falar bem), em geral estrangeiros em Atenas, que cobravam pelos ensinamentos.", "ex": "Correto: eram profissionais da paideia (educação/cultivo da humanidade) da cidadania."}, {"id": "b", "txt": "Sacerdotes dos templos gregos.", "ex": "Não corresponde ao texto."}, {"id": "c", "txt": "Soldados do exército ateniense.", "ex": "Não corresponde ao texto."}, {"id": "d", "txt": "Agricultores que trabalhavam no campo.", "ex": "Eles ensinavam os cidadãos a discursar e argumentar."}], "c": "a"}, {"n": 15, "tipo": "mc", "tag": "Sofistas × Sócrates", "t": "<p>Sobre a origem dos valores morais, a diferença entre sofistas e Sócrates é que:</p>", "o": [{"id": "a", "txt": "Para os sofistas, os valores eram acordos/decisões humanas que podem mudar; para Sócrates, deviam ser buscados racionalmente na natureza humana.", "ex": "Correto: por isso Sócrates propôs o “conhece-te a ti mesmo”, o esforço racional para conhecer a natureza humana."}, {"id": "b", "txt": "Os dois achavam que os valores vinham dos deuses.", "ex": "Os sofistas recusavam a origem divina dos valores."}, {"id": "c", "txt": "Sócrates dizia que eram acordos humanos, e os sofistas, que vinham da natureza.", "ex": "Está invertido."}, {"id": "d", "txt": "Nenhum dos dois se interessava por valores morais.", "ex": "Os dois colocaram o ser humano e a ética no centro da filosofia."}], "c": "a"}];
+var SEMENTE=100002;var PREF='MED';var PAISCOD='PAIS-77';var TEMDISC=false;var MONO="'Courier New',monospace";
+
+var KEY='filo6sj_mod456_v1_quiz_v1'; var mem={};
+function ler(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return mem}}
+function gravar(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){mem=s}carimbo();}
+function carimbo(){
+  var d=new Date();
+  var f=d.toLocaleDateString('pt-BR')+' às '+d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  S.quando=f;
+  try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){mem=S}
+  var el=document.getElementById('status'); if(el)el.textContent='💾 Salvo automaticamente — última vez: '+f;
+}
+function ligarPainel(){
+  document.getElementById('btExportar').onclick=function(){
+    var blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+    var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='quiz-filosofia6-labirinto.json'; a.click();
+  };
+  document.getElementById('btImportar').onclick=function(){document.getElementById('arquivo').click();};
+  document.getElementById('arquivo').onchange=function(e){
+    var f=e.target.files[0]; if(!f)return; var r=new FileReader();
+    r.onload=function(){ try{ S=normaliza(JSON.parse(r.result)); gravar(S); render();
+        aviso('Pronto','Seu progresso foi importado com sucesso.');
+      }catch(err){ aviso('Ops','Não consegui ler esse arquivo. Ele precisa ser o .json exportado por este material.'); } };
+    r.readAsText(f);
+  };
+  document.getElementById('btZerar').onclick=function(){
+    aviso('Zerar tudo?','Isso apaga tudo o que foi respondido nesta página. Não dá para desfazer.',function(){
+      S=normaliza({}); gravar(S); render(); },true);
+  };
+}
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);
+  t=t+Math.imul(t^t>>>7,61|t)^t;return ((t^t>>>14)>>>0)/4294967296;};}
+function embaralha(arr,semente){
+  var r=mulberry32(semente),a=arr.slice();
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(r()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+  return a;
+}
+function codigo(pref,acertos,semente){
+  var L='ABCDEFGHJKLMNPQRSTUVWXYZ', r=mulberry32(semente*7919+13);
+  var y=L[Math.floor(r()*L.length)]+L[Math.floor(r()*L.length)];
+  var n=(acertos<10?'0':'')+acertos;
+  return pref+'-'+n+'-'+y;
+}
+function normaliza(d){d=d||{};if(!d.resp)d.resp={};if(d.enviado===undefined)d.enviado=false;
+  if(d.liberado===undefined)d.liberado=false;if(!d.codigo)d.codigo='';return d;}
+var S=normaliza(ler());
+var ORDEM={};
+QS.forEach(function(q){
+  if(q.tipo==='mc'||q.tipo==='rom'){ ORDEM[q.n]=embaralha(q.o,SEMENTE+q.n*101); }
+});
+function acertou(q){
+  var r=S.resp[q.n];
+  if(q.tipo==='disc')return false;
+  if(q.tipo==='som')return r!==undefined&&r!==''&&parseInt(r,10)===q.soma;
+  return r===q.c;
+}
+function totalObj(){var t=0;QS.forEach(function(q){if(q.tipo!=='disc')t++;});return t;}
+function acertos(){var a=0;QS.forEach(function(q){if(acertou(q))a++;});return a;}
+function letra(i){return 'abcdefgh'[i];}
+function render(){
+  var alvo=document.getElementById('qs');alvo.innerHTML='';
+  QS.forEach(function(q){
+    var sec=document.createElement('section');sec.className='q';
+    var h='<div class="cabq"><span class="nq">'+(q.tipo==='disc'?'DISCURSIVA':'Questão '+q.n)+'</span>'+
+      (q.tag?'<span class="tag">'+q.tag+'</span>':'')+(q.val?'<span class="val">'+q.val+'</span>':'')+'</div>';
+    h+='<div class="enun">'+q.t+'</div>';
+    var ord=ORDEM[q.n];
+    h+='<ul class="alts">';
+    ord.forEach(function(op,i){
+      var cls='',ex='';
+      var marcada=(S.resp[q.n]===op.id);
+      if(S.liberado){
+        cls=(op.id===q.c)?'certa':'errada';
+        ex='<p class="expl'+(op.id===q.c?' boa':'')+'">'+(op.id===q.c?'✅ ':'❌ ')+op.ex+'</p>';
+      }
+      if(marcada&&!S.liberado)cls+=' marcada';
+      h+='<li><label class="'+cls+'"><input type="radio" name="q'+q.n+'" value="'+op.id+'" data-n="'+q.n+
+         '" class="inMc" '+(marcada?'checked':'')+' '+(S.enviado?'disabled':'')+'>'+
+         '<span class="letra">'+letra(i)+')</span><span>'+op.txt+'</span></label>'+ex+'</li>';
+    });
+    h+='</ul>';
+    sec.innerHTML=h;alvo.appendChild(sec);
+  });
+  ligarQ(); pintaProg(); painelResultado();
+}
+function pintaProg(){
+  var c=0;QS.forEach(function(q){var r=S.resp[q.n];if(r!==undefined&&r!=='')c++;});
+  document.getElementById('barra').style.width=(c/QS.length*100)+'%';
+  document.getElementById('txtProg').textContent=c+' de '+QS.length+' questões respondidas.';
+  var bt=document.getElementById('btEnviar'); if(bt)bt.disabled=S.enviado||(c<QS.length);
+}
+function ligarQ(){
+  document.querySelectorAll('.inMc').forEach(function(el){
+    el.addEventListener('change',function(){S.resp[el.dataset.n]=el.value;gravar(S);pintaProg();
+      el.closest('.alts').querySelectorAll('label').forEach(function(l){l.classList.remove('marcada');});
+      el.closest('label').classList.add('marcada');});
+  });
+}
+function painelResultado(){
+  var box=document.getElementById('resultado');
+  if(!S.enviado){box.style.display='none';return;}
+  box.style.display='block';
+  var a=acertos(),t=totalObj();
+  box.innerHTML='<h2>📋 Respostas enviadas</h2>'+
+    '<p>Código de liberação para os pais:</p><div class="cod">'+S.codigo+'</div>'+
+    '<p style="font-family:'+MONO+';font-size:13px">Os dois números do meio são a quantidade de acertos (de '+t+' questões).</p>';
+}
+document.getElementById('btEnviar').onclick=function(){
+  var falta=0;QS.forEach(function(q){var r=S.resp[q.n];if(r===undefined||r==='')falta++;});
+  if(falta){aviso('Falta pouco','Ainda há '+falta+' questão(ões) sem resposta. Responda todas antes de enviar.');return;}
+  aviso('Enviar respostas?','Depois de enviar não dá mais para mudar as respostas. O código de liberação vai aparecer na tela.',function(){
+    S.enviado=true; S.codigo=codigo(PREF,acertos(),SEMENTE); gravar(S); render();
+    document.getElementById('resultado').scrollIntoView({behavior:'smooth',block:'center'});
+  },true);
+};
+document.getElementById('btGab').onclick=function(){
+  var v=(document.getElementById('codGab').value||'').trim().toUpperCase();
+  if(S.enviado&&(v===S.codigo||v===PAISCOD)){S.liberado=true;gravar(S);render();
+    document.getElementById('qs').scrollIntoView({behavior:'smooth'});}
+  else if(!S.enviado){document.getElementById('avGab').textContent=' ❌ Envie as respostas primeiro.';}
+  else{document.getElementById('avGab').textContent=' ❌ Código incorreto.';}
+};
+ligarPainel(); render(); carimbo();
+</script>
+</body></html>
